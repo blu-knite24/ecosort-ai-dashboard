@@ -17,7 +17,7 @@ const WEIGHT: Record<Category, [number, number]> = {
 
 let seq = 0;
 const rnd = (a: number, b: number) => a + Math.random() * (b - a);
-const pick = <T,>(a: T[]) => a[Math.floor(Math.random() * a.length)];
+const pick = <T,>(a: T[]): T => a[Math.floor(Math.random() * a.length)] as T;
 
 export function makeClassification(ts = Date.now()): Classification {
   const r = Math.random();

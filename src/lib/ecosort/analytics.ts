@@ -22,7 +22,7 @@ type Row = { label: string; total: number; count: number } & Record<Category, nu
 function bucket(list: Classification[], keyOf: (d: Date) => string, keys: string[], labels: string[]): Row[] {
   const map = new Map<string, Row>();
   keys.forEach((k, i) =>
-    map.set(k, { label: labels[i], total: 0, count: 0, plastic: 0, paper: 0, metal: 0, biodegradable: 0 }),
+    map.set(k, { label: labels[i] ?? k, total: 0, count: 0, plastic: 0, paper: 0, metal: 0, biodegradable: 0 }),
   );
   for (const r of list) {
     const row = map.get(keyOf(new Date(r.ts)));

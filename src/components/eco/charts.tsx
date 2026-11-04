@@ -19,7 +19,7 @@ export function Doughnut({ data, unit = "kg" }: { data: Record<Category, number>
             <Pie data={rows} dataKey="value" innerRadius="66%" outerRadius="100%" paddingAngle={2} stroke="none">
               {rows.map((r) => <Cell key={r.c} fill={CATEGORY_COLOR[r.c]} />)}
             </Pie>
-            <Tooltip {...tip} formatter={(v: number) => `${v} ${unit}`} />
+            <Tooltip {...tip} formatter={(v) => `${v} ${unit}`} />
           </PieChart>
         </ResponsiveContainer>
         <div className="pointer-events-none absolute inset-0 grid place-items-center text-center">

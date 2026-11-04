@@ -59,13 +59,13 @@ function Analytics() {
 
       <div className="mt-4 grid gap-4 lg:grid-cols-3">
         <Panel title="Category Distribution (kg)" icon={PieChart}><Doughnut data={t.kg} /></Panel>
-        <Panel title={`${gran[0].toUpperCase() + gran.slice(1)} Collection by Category (kg)`} icon={BarChart3} className="lg:col-span-2"><StackedBars data={series} /></Panel>
+        <Panel title={`${gran.charAt(0).toUpperCase() + gran.slice(1)} Collection by Category (kg)`} icon={BarChart3} className="lg:col-span-2"><StackedBars data={series} /></Panel>
         <Panel title="Total Weight by Category" icon={Scale}>
           <div className="space-y-3">
             {byWeight.map((r, i) => (
               <div key={r.label}>
                 <div className="mb-1 flex justify-between text-xs"><span>{r.label}</span><span className="tabular-nums text-muted-foreground">{r.kg} kg</span></div>
-                <div className="h-2 rounded-full bg-muted"><div className="h-full rounded-full" style={{ width: `${t.totalKg ? (r.kg / t.totalKg) * 100 : 0}%`, background: CATEGORY_COLOR[CATEGORIES[i]] }} /></div>
+                <div className="h-2 rounded-full bg-muted"><div className="h-full rounded-full" style={{ width: `${t.totalKg ? (r.kg / t.totalKg) * 100 : 0}%`, background: CATEGORY_COLOR[CATEGORIES[i] ?? "plastic"] }} /></div>
               </div>
             ))}
           </div>

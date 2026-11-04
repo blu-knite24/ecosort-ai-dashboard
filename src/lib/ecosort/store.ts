@@ -37,7 +37,7 @@ export interface AppState {
 
 const DEFAULT_SETTINGS: Settings = {
   mode: "demo",
-  backendUrl: (import.meta.env.VITE_ECOSORT_BACKEND_URL as string) || "http://localhost:4000",
+  backendUrl: (import.meta.env["VITE_ECOSORT_BACKEND_URL"] as string) || "http://localhost:4000",
   apiToken: "",
   heartbeatTimeoutSec: 15,
   ackTimeoutSec: 10,
