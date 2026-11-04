@@ -11,7 +11,7 @@ export const Route = createFileRoute("/devices")({
 });
 
 const ICONS: Record<string, any> = { esp32: Cpu, camera: Camera, metal: Magnet, moisture: Droplets, ir: ScanLine, conveyor: Workflow, servo: Cog };
-const EXPECTED = [
+const EXPECTED: [string, string][] = [
   ["esp32", "ESP32 Controller"], ["camera", "Camera & AI Processor"], ["metal", "Metal Detection Sensor"], ["moisture", "Moisture Sensor"],
   ["ir", "IR Object Detection"], ["conveyor", "Conveyor Motor"], ["servo", "Servo Sorting Mechanism"],
 ];

@@ -64,7 +64,7 @@ export interface CommandRecord {
   sentAt: number;
   state: "sending" | "awaiting_ack" | "acknowledged" | "rejected" | "timeout" | "error";
   ackAt?: number;
-  message?: string;
+  message?: string | undefined;
 }
 
 export interface Connection {
@@ -72,7 +72,7 @@ export interface Connection {
   mqtt: boolean;
   esp32: boolean;
   lastDeviceMessage: number | null;
-  error?: string;
+  error?: string | undefined;
 }
 
 export function normalizeCategory(raw: string): Category | null {
