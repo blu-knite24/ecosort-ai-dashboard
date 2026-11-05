@@ -14,8 +14,9 @@ function SettingsPage() {
   const current = useEco((s) => s.settings);
   const [f, setF] = useState<Settings>(current);
   const [saved, setSaved] = useState(false);
+  const [error,setError]=useState("");
   useEffect(() => setF(current), [current]);
-  const up = (p: Partial<Settings>) => { setF({ ...f, ...p }); setSaved(false); };
+  const up = (p: Partial<Settings>) => { setF({ ...f, ...p }); setSaved(false);setError(""); };
 
   return (
     <>
@@ -23,10 +24,10 @@ function SettingsPage() {
       <div className="grid gap-4 lg:grid-cols-2">
         <Panel title="Data Source" icon={FlaskConical}>
           <div className="grid gap-3 sm:grid-cols-2">
-            {([["demo", "Demo simulation", "In-browser simulated device. All data labelled as simulated."], ["live", "Live hardware", "Connects to the EcoSort Node.js backend over Socket.IO. Shows only real device data."]] as const).map(([m, t, d]) => (
-              <button key={m} onClick={() => up({ mode: m })} className={`rounded-lg border p-3 text-left transition-colors ${f.mode === m ? "border-primary/50 bg-primary/10" : "hover:bg-secondary/40"}`}>
+            {([["demo", "Demo simulation", "Simulated"], ["mqtt_demo", "MQTT test device", "Simulated · MQTT"], ["live", "Live hardware", "Physical device"]] as const).map(([m, t, d]) => (
+              <Btn key={m} aria-pressed={f.mode===m} onClick={() => up({ mode: m })} className={`block h-auto p-3 text-left ${f.mode === m ? "border-primary/50 bg-primary/10" : "hover:bg-secondary/40"}`}>
                 <p className="text-sm font-medium">{t}</p><p className="mt-1 text-xs text-muted-foreground">{d}</p>
-              </button>
+              </Btn>
             ))}
           </div>
         </Panel>
@@ -45,8 +46,9 @@ function SettingsPage() {
         </Panel>
       </div>
       <div className="mt-4 flex items-center justify-end gap-3">
-        {saved && <span className="text-xs text-success">Saved — reconnected.</span>}
-        <Btn variant="primary" onClick={() => { saveSettings(f); setSaved(true); }}><Save className="h-4 w-4" />Save settings</Btn>
+        {saved && <span className="text-xs text-success">Settings saved</span>}
+        {error && <span role="alert" className="text-xs text-destructive">{error}</span>}
+        <Btn variant="primary" onClick={() => {try{saveSettings(f);setSaved(true);}catch(e){setError(e instanceof Error?e.message:"Could not save settings");}}}><Save className="h-4 w-4" />Save settings</Btn>
       </div>
     </>
   );

@@ -42,7 +42,7 @@ function Live() {
                 <Camera className="mx-auto mb-2 h-6 w-6" />
                 Camera preview<br />stream not attached
               </div>
-              <span className="absolute left-2 top-2"><Pill tone={machine === "running" ? "danger" : "muted"}>{machine === "running" ? "REC" : "IDLE"}</Pill></span>
+              <span className="absolute left-2 top-2"><Pill tone="muted">Camera offline</Pill></span>
             </div>
             {latest ? (
               <div className="flex flex-col gap-3">
