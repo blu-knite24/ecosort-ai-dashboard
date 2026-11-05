@@ -21,9 +21,11 @@ export function MachineControls() {
   const commands = useEco((s) => s.commands);
   const mode = useEco((s) => s.settings.mode);
   const backend = useEco((s) => s.connection.backend);
+  const mqtt=useEco(s=>s.connection.mqtt);
+  const esp32=useEco(s=>s.connection.esp32);
   const [confirm, setConfirm] = useState(false);
   const pending = commands.some((c) => c.state === "sending" || c.state === "awaiting_ack");
-  const disabled = pending || (mode === "live" && !backend);
+  const disabled = pending || (mode!=="demo" && (!backend || !mqtt || !esp32));
 
   return (
     <Panel title="Machine Controls" icon={Power} action={<span className="text-xs text-muted-foreground">State: <span className="font-medium text-foreground">{machine}</span></span>}>
@@ -33,7 +35,7 @@ export function MachineControls() {
         <Btn disabled={disabled || machine !== "paused"} onClick={() => sendCommand("resume")}><RotateCcw className="h-4 w-4" />Resume</Btn>
         <Btn variant="danger" disabled={disabled || machine === "stopped"} onClick={() => setConfirm(true)}><Power className="h-4 w-4" />Stop</Btn>
       </div>
-      {mode === "live" && !backend && <p className="mt-3 text-xs text-destructive">Backend not connected — commands unavailable.</p>}
+      {mode!=="demo" && (!backend || !mqtt || !esp32) && <p className="mt-3 text-xs text-destructive">Backend or device offline — commands unavailable.</p>}
       {mode === "demo" && <p className="mt-3 text-xs text-muted-foreground">Demo mode: acknowledgements come from the simulated device.</p>}
 
       <div className="mt-4 space-y-2">
@@ -56,7 +58,7 @@ export function MachineControls() {
       </div>
 
       {confirm && (
-        <div className="fixed inset-0 z-50 grid place-items-center p-4" role="dialog" aria-modal="true">
+        <div className="fixed inset-0 z-50 grid place-items-center p-4" role="dialog" aria-modal="true" aria-label="Stop the machine?">
           <div className="absolute inset-0 bg-background/70 backdrop-blur-sm" onClick={() => setConfirm(false)} />
           <div className="glass relative w-full max-w-sm bg-popover p-5">
             <div className="flex items-center gap-2 text-destructive"><AlertTriangle className="h-5 w-5" /><h3 className="font-semibold">Stop the machine?</h3></div>

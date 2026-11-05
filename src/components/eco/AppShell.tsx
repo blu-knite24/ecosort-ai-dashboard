@@ -67,7 +67,7 @@ function StatusBar() {
   const machine = useEco((s) => s.machine);
   return (
     <div className="flex flex-wrap items-center gap-2">
-      {mode === "demo" ? <Pill tone="warning">Demo simulation</Pill> : <Pill tone="info">Live mode</Pill>}
+      {mode!=="live" ? <Pill tone="warning">{mode==="mqtt_demo"?"MQTT simulation":"Demo simulation"}</Pill> : <Pill tone="info">Live mode</Pill>}
       <Pill tone={conn.mqtt ? "success" : "danger"}>MQTT</Pill>
       <Pill tone={conn.esp32 ? "success" : "danger"}>ESP32</Pill>
       <Pill tone={machine === "running" ? "success" : machine === "paused" ? "warning" : machine === "unknown" ? "muted" : "danger"}>

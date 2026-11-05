@@ -14,7 +14,7 @@ export const CATEGORY_COLOR: Record<Category, string> = {
   biodegradable: "var(--cat-biodegradable)",
 };
 
-export type DataMode = "demo" | "live";
+export type DataMode = "demo" | "mqtt_demo" | "live";
 export type MachineState = "running" | "paused" | "stopped" | "fault" | "unknown";
 export type MachineCommand = "start" | "pause" | "resume" | "stop";
 

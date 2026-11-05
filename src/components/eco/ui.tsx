@@ -85,7 +85,7 @@ export function Empty({ children }: { children: ReactNode }) {
 
 export function DataSourceTag() {
   const mode = useEco((s) => s.settings.mode);
-  return mode === "demo" ? <Pill tone="warning">Simulated demo data</Pill> : <Pill tone="info">Live hardware data</Pill>;
+  return mode!=="live" ? <Pill tone="warning">{mode==="mqtt_demo"?"Simulated MQTT data":"Simulated demo data"}</Pill> : <Pill tone="info">Live hardware data</Pill>;
 }
 
 export function Btn({ variant = "default", className, ...p }: React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "default" | "primary" | "danger" | "ghost" }) {

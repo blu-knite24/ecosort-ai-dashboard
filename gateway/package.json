@@ -1,0 +1,9 @@
+{
+  "name": "ecosort-gateway",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": { "start": "node --env-file-if-exists=.env src/server.mjs", "simulate": "node --env-file-if-exists=.env src/simulator.mjs", "test": "node --test test/*.test.mjs" },
+  "dependencies": { "express": "^5.1.0", "socket.io": "^4.8.1", "mqtt": "^5.14.1", "zod": "^3.25.76", "cors": "^2.8.5", "helmet": "^8.1.0", "express-rate-limit": "^8.1.0" },
+  "devDependencies": { "aedes": "^0.51.3", "socket.io-client": "^4.8.1" }
+}

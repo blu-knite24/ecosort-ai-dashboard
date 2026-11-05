@@ -35,7 +35,7 @@ function Mqtt() {
       <div className="grid gap-4 lg:grid-cols-3">
         <Panel title="Connection" icon={Radio}>
           <dl className="space-y-2.5 text-sm">
-            <div className="flex justify-between"><dt className="text-muted-foreground">Data source</dt><dd>{s.mode === "demo" ? <Pill tone="warning">Demo simulation</Pill> : <Pill tone="info">Live backend</Pill>}</dd></div>
+            <div className="flex justify-between"><dt className="text-muted-foreground">Data source</dt><dd>{s.mode!=="live" ? <Pill tone="warning">{s.mode==="mqtt_demo"?"MQTT simulation":"Demo simulation"}</Pill> : <Pill tone="info">Live backend</Pill>}</dd></div>
             <div className="flex justify-between gap-2"><dt className="text-muted-foreground">Backend URL</dt><dd className="truncate font-mono text-xs">{s.mode === "demo" ? "— (in-browser)" : s.backendUrl}</dd></div>
             <div className="flex justify-between"><dt className="text-muted-foreground">Socket.IO</dt><dd><Pill tone={conn.backend ? "success" : "danger"}>{conn.backend ? "Connected" : "Disconnected"}</Pill></dd></div>
             <div className="flex justify-between"><dt className="text-muted-foreground">MQTT broker</dt><dd><Pill tone={conn.mqtt ? "success" : "danger"}>{conn.mqtt ? "Connected" : "Disconnected"}</Pill></dd></div>
